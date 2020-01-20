@@ -14,7 +14,8 @@ from collections import defaultdict
 player_names = testUtility.PlayerNames()
 
 #number of curses and victory cards
-nV = testUtility.VictoryCardNum(player_names)
+#nV = testUtility.VictoryCardNum(player_names)
+nV = 0
 nC = testUtility.CurseNum(player_names)
 
 #Define box
@@ -42,9 +43,9 @@ for name in player_names:
         players.append(Dominion.Player(name))
 
 #Play the game
-turn  = 0
+turn = 0
 while not Dominion.gameover(supply):
-    turn += 1    
+    turn += 1
     print("\r")    
     for value in supply_order:
         print (value)

@@ -14,27 +14,17 @@ from collections import defaultdict
 player_names = testUtility.PlayerNames()
 
 #number of curses and victory cards
-if len(player_names)>2:
-    nV=12
-else:
-    nV=8
-nC = -10 + 10 * len(player_names)
+nV = testUtility.VictoryCardNum(player_names)
+nC = testUtility.CurseNum(player_names)
 
 #Define box
 box = testUtility.DefineBox(nV)
 
-supply_order = {0:['Curse','Copper'],2:['Estate','Cellar','Chapel','Moat'],
-                3:['Silver','Chancellor','Village','Woodcutter','Workshop'],
-                4:['Gardens','Bureaucrat','Feast','Militia','Moneylender','Remodel','Smithy','Spy','Thief','Throne Room'],
-                5:['Duchy','Market','Council Room','Festival','Laboratory','Library','Mine','Witch'],
-                6:['Gold','Adventurer'],8:['Province']}
+supply_order = testUtility.SupplyOrder()
 
 #Pick 10 cards from box to be in the supply.
-boxlist = [k for k in box]
-random.shuffle(boxlist)
-random10 = boxlist[:10]
-supply = defaultdict(list,[(k,box[k]) for k in random10])
-
+#supply = testUtility.PickSupply(box)
+supply = testUtility.PickSupply(supply_order)
 
 #The supply always has these cards
 testUtility.SupplyCards(supply, player_names, nV, nC)
@@ -53,7 +43,7 @@ for name in player_names:
         players.append(Dominion.Player(name))
 
 #Play the game
-turn  = 0
+turn = 0
 while not Dominion.gameover(supply):
     turn += 1    
     print("\r")    

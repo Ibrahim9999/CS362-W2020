@@ -5,8 +5,7 @@ Created on Sun Jan 19 2:32:00 2020
 @author: mahmoudi
 """
 from collections import defaultdict
-from random import random
-
+import random
 import Dominion
 
 
