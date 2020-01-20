@@ -73,7 +73,9 @@ def PickSupply(box):
     boxlist = [k for k in box]
     random.shuffle(boxlist)
     random10 = boxlist[:10]
+
     return defaultdict(list, [(k, box[k]) for k in random10])
+
 
 def SupplyCards(supply, player_names, nV, nC):
     # The supply always has these cards
@@ -84,3 +86,17 @@ def SupplyCards(supply, player_names, nV, nC):
     supply["Duchy"] = [Dominion.Duchy()] * nV
     supply["Province"] = [Dominion.Province()] * nV
     supply["Curse"] = [Dominion.Curse()] * nC
+
+
+def ConstructPlayers(player_names):
+    # Costruct the Player objects
+    players = []
+    for name in player_names:
+        if name[0] == "*":
+            players.append(Dominion.ComputerPlayer(name[1:]))
+        elif name[0] == "^":
+            players.append(Dominion.TablePlayer(name[1:]))
+        else:
+            players.append(Dominion.Player(name))
+
+    return players
